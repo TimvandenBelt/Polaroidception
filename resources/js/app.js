@@ -3,6 +3,7 @@ import("./bootstrap");
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/inertia-vue3";
 import { InertiaProgress } from "@inertiajs/progress";
+import PrimeVue from "primevue/config";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText ||
@@ -17,6 +18,7 @@ let app = createInertiaApp({
         return (
             createApp({ render: () => h(app, props) })
                 .use(plugin)
+                .use(PrimeVue)
                 // eslint-disable-next-line no-undef
                 .mixin({ methods: { route } })
                 .mount(el)
