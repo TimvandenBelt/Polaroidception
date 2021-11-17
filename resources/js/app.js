@@ -11,7 +11,8 @@ const appName =
 // eslint-disable-next-line no-unused-vars
 let app = createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => import(`./Pages/${name}.vue`).default,
+    // eslint-disable-next-line no-undef
+    resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
         return (
             createApp({ render: () => h(app, props) })
