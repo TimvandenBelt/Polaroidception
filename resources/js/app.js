@@ -1,20 +1,26 @@
-require('./bootstrap');
+import("./bootstrap");
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
+import { createApp, h } from "vue";
+import { createInertiaApp } from "@inertiajs/inertia-vue3";
+import { InertiaProgress } from "@inertiajs/progress";
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName =
+    window.document.getElementsByTagName("title")[0]?.innerText ||
+    "Polaroidception";
 
-createInertiaApp({
+// eslint-disable-next-line no-unused-vars
+let app = createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => require(`./Pages/${name}.vue`),
+    resolve: (name) => import(`./Pages/${name}.vue`).default,
     setup({ el, app, props, plugin }) {
-        return createApp({ render: () => h(app, props) })
-            .use(plugin)
-            .mixin({ methods: { route } })
-            .mount(el);
+        return (
+            createApp({ render: () => h(app, props) })
+                .use(plugin)
+                // eslint-disable-next-line no-undef
+                .mixin({ methods: { route } })
+                .mount(el)
+        );
     },
 });
 
-InertiaProgress.init({ color: '#4B5563' });
+InertiaProgress.init({ color: "#4B5563" });
