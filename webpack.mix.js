@@ -17,6 +17,10 @@ mix.js("resources/js/app.js", "public/js")
     .webpackConfig(require("./webpack.config"));
 
 mix.options({
+    hmrOptions: {
+        host: "localhost", // Requires adding entry on /etc/hosts file if I want
+        port: 8585, // to use laravel.test but localhost, 127.0.0.1
+    },
     postCss: [require("tailwindcss")],
 });
 
