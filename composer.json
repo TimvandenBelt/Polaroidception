@@ -1,5 +1,5 @@
 {
-    "name": "laravel/laravel",
+    "name": "timvandenbelt/polaroidception",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": [
@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.3",
@@ -32,6 +32,7 @@
         "phpstan/phpstan": "^1.1",
         "phpunit/phpunit": "^9.5.10",
         "roave/security-advisories": "dev-latest",
+        "seld/phar-utils": "^1.2",
         "vimeo/psalm": "^4.12"
     },
     "autoload": {
