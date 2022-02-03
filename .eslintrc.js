@@ -3,16 +3,20 @@ module.exports = {
     env: {
         browser: true,
         es2021: true,
+        amd: true,
+        node: true,
     },
-    extends: [
-        "eslint:recommended",
-        "plugin:vue/vue3-essential",
-        "plugin:prettier/recommended",
-    ],
+
     parserOptions: {
         ecmaVersion: 13,
         sourceType: "module",
     },
-    plugins: ["vue", "prettier"],
+    plugins: ["vue", "vuejs-accessibility", "prettier"],
+    extends: [
+        "eslint:recommended",
+        "plugin:vue/vue3-recommended",
+        "plugin:vuejs-accessibility/recommended",
+        "plugin:prettier/recommended",
+    ],
     rules: {},
 };

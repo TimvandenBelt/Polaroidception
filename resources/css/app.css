@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    @apply antialiased;
+    font-size: 17px;
+}
+
+
+.link {
+    @apply cursor-pointer rounded text-gray-700 transition-colors duration-100
+    ease-in-out hover:bg-primary-200 hover:text-black;
+
+    &.solid {
+        @apply bg-primary-50;
+    }
+
+    .menu-button {
+        @apply hover:text-black text-gray-700;
+        div {
+            @apply inline-block rounded-lg px-4 py-2;
+        }
+
+        svg {
+            @apply mr-2 inline-block h-5 w-5;
+        }
+    }
+
+    &.menuItem {
+        @apply rounded-none hover:rounded-none;
+        div {
+            &:not(.icon) {
+                @apply ml-6;
+            }
+
+            @apply my-1;
+        }
+    }
+
+    .active {
+        @apply block bg-primary-200 text-black;
+        span {
+            @apply font-bold;
+        }
+    }
+}
+
+.card {
+    @apply mx-auto mb-6 w-full rounded-2xl bg-white px-8 py-4 shadow-md border border-gray-50;
+    .card-meta {
+        @apply flex items-center justify-between;
+        .meta-text {
+            @apply text-sm font-light text-gray-600;
+        }
+    }
+
+    .card-title {
+        @apply text-2xl font-bold text-gray-700 hover:text-gray-600 hover:underline;
+    }
+
+    .card-body {
+        @apply mt-2 text-gray-600;
+    }
+
+    .card-footer {
+        @apply mt-4 flex items-center justify-between;
+    }
+}
+
+.tag {
+    @apply mx-1 cursor-pointer rounded py-1 px-2;
+}
+
+th {
+    @apply first-letter:uppercase;
+}

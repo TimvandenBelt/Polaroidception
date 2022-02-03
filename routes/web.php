@@ -22,7 +22,47 @@ Route::get("/", function () {
         "laravelVersion" => Application::VERSION,
         "phpVersion" => PHP_VERSION,
     ]);
-});
+})->name("index");
+
+Route::prefix("admin")
+    ->name("admin.")
+    ->group(function () {
+        Route::get("/", function () {
+            return Inertia::render("Admin/AdminIndex", [
+                "title" => "Admin dashboard",
+            ]);
+        })->name("index");
+
+        Route::get("account/profile", function () {
+            return Inertia::render("Admin/AdminIndex", [
+                "title" => "Profile",
+            ]);
+        })->name("profile.index");
+
+        Route::get("account/settings", function () {
+            return Inertia::render("Admin/AdminIndex", [
+                "title" => "Account settings",
+            ]);
+        })->name("settings.index");
+
+        Route::get("/pages", function () {
+            return Inertia::render("Admin/Pages/PagesIndex", [
+                "title" => "Manage pages",
+            ]);
+        })->name("pages.index");
+
+        Route::get("/photos", function () {
+            return Inertia::render("Admin/AdminIndex", [
+                "title" => "Manage photos",
+            ]);
+        })->name("photos.index");
+
+        Route::get("/tags", function () {
+            return Inertia::render("Admin/AdminIndex", [
+                "title" => "Manage Tags",
+            ]);
+        })->name("tags.index");
+    });
 
 Route::middleware(["auth:sanctum", "verified"])
     ->get("/dashboard", function () {
