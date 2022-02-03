@@ -16,8 +16,6 @@
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "pestphp/pest": "^1.16",
-        "pestphp/pest-plugin-laravel": "^1.1",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
@@ -28,6 +26,8 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "nunomaduro/larastan": "^1.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.2",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^1.1",
         "phpunit/phpunit": "^9.5.10",
