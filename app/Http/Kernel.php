@@ -14,7 +14,6 @@ use App\Http\Middleware\VerifyCsrfToken;
 use Fruitcake\Cors\HandleCors;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
-use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -26,6 +25,8 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+
+//use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 
 class Kernel extends HttpKernel
 {
@@ -86,6 +87,6 @@ class Kernel extends HttpKernel
         "password.confirm" => RequirePassword::class,
         "signed" => ValidateSignature::class,
         "throttle" => ThrottleRequests::class,
-        "verified" => EnsureEmailIsVerified::class,
+        //        "verified" => EnsureEmailIsVerified::class,
     ];
 }
