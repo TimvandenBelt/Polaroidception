@@ -2,43 +2,40 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use function Pest\Laravel\{actingAs, put};
 
-test('password can be updated', function () {
-    $this->actingAs($user = User::factory()->create());
+test("password can be updated", function (User $user) {
+    actingAs($user);
 
-    $response = $this->put('/user/password', [
-        'current_password' => 'password',
-        'password' => 'new-password',
-        'password_confirmation' => 'new-password',
+    put("/user/password", [
+        "current_password" => "password",
+        "password" => "new-password",
+        "password_confirmation" => "new-password",
     ]);
 
-    expect(Hash::check('new-password', $user->fresh()->password))->toBeTrue();
-});
+    expect(Hash::check("new-password", $user->fresh()->password))->toBeTrue();
+})->with("single-user");
 
-test('current password must be correct', function () {
-    $this->actingAs($user = User::factory()->create());
+test("current password must be correct", function (User $user) {
+    actingAs($user);
 
-    $response = $this->put('/user/password', [
-        'current_password' => 'wrong-password',
-        'password' => 'new-password',
-        'password_confirmation' => 'new-password',
-    ]);
+    put("/user/password", [
+        "current_password" => "wrong-password",
+        "password" => "new-password",
+        "password_confirmation" => "new-password",
+    ])->assertSessionHasErrors();
 
-    $response->assertSessionHasErrors();
+    expect(Hash::check("password", $user->fresh()->password))->toBeTrue();
+})->with("single-user");
 
-    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
-});
+test("new passwords must match", function (User $user) {
+    $this->actingAs($user);
 
-test('new passwords must match', function () {
-    $this->actingAs($user = User::factory()->create());
+    put("/user/password", [
+        "current_password" => "password",
+        "password" => "new-password",
+        "password_confirmation" => "wrong-password",
+    ])->assertSessionHasErrors();
 
-    $response = $this->put('/user/password', [
-        'current_password' => 'password',
-        'password' => 'new-password',
-        'password_confirmation' => 'wrong-password',
-    ]);
-
-    $response->assertSessionHasErrors();
-
-    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
-});
+    expect(Hash::check("password", $user->fresh()->password))->toBeTrue();
+})->with("single-user");

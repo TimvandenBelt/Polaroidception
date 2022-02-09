@@ -24,6 +24,10 @@ Route::get("/", function () {
     ]);
 })->name("index");
 
+Route::get("/login", function () {
+    return "test";
+})->name("login");
+
 Route::prefix("admin")
     ->name("admin.")
     ->group(function () {

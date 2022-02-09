@@ -1,5 +1,5 @@
 <?php
 
-test('example', function () {
-    expect(true)->toBeTrue();
-});
+test("example is true")
+    ->expect(true)
+    ->toBeTrue();

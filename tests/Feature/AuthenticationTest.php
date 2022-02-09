@@ -2,32 +2,26 @@
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use function Pest\Laravel\{assertAuthenticated, assertGuest, post};
 
-test('login screen can be rendered', function () {
-    $response = $this->get('/login');
+test("login screen can be rendered")
+    ->get("/login")
+    ->assertStatus(200);
 
-    $response->assertStatus(200);
-});
+test("users can authenticate using the login screen", function (User $user) {
+    post("/login", [
+        "email" => $user->email,
+        "password" => "password",
+    ])->assertRedirect(RouteServiceProvider::HOME);
 
-test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    assertAuthenticated();
+})->with("single-user");
 
-    $response = $this->post('/login', [
-        'email' => $user->email,
-        'password' => 'password',
+test("users can not authenticate with invalid_password", function (User $user) {
+    post("/login", [
+        "email" => $user->email,
+        "password" => "wrong-password",
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertRedirect(RouteServiceProvider::HOME);
-});
-
-test('users can not authenticate with invalid_password', function () {
-    $user = User::factory()->create();
-
-    $this->post('/login', [
-        'email' => $user->email,
-        'password' => 'wrong-password',
-    ]);
-
-    $this->assertGuest();
-});
+    assertGuest();
+})->with("single-user");

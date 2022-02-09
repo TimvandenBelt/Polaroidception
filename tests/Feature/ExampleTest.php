@@ -1,7 +1,5 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
-
-    $response->assertStatus(200);
-});
+test("webserver returns a 200 response ")
+    ->get("/")
+    ->assertOk();

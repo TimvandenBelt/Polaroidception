@@ -23,10 +23,10 @@ class CreatePagesTable extends Migration
                 ->index();
 
             $table->mediumText("body");
-            $table->text("excerpt");
+            $table->text("excerpt")->nullable();
 
-            $table->boolean("published");
-            $table->dateTime("published_at");
+            $table->boolean("published")->default(false);
+            $table->dateTime("published_at")->useCurrent();
 
             $table->softDeletes();
             $table->timestamps();
